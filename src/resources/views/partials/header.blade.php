@@ -75,6 +75,3 @@
         </div>
     </div>
 </header>
-
-
-want to add header and localization
