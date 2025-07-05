@@ -1,0 +1,23 @@
+{
+  "name": "kaung/crudkit",
+  "description": "Drop-in generic CRUD for Laravel",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Kaung\\CrudKit\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Kaung\\CrudKit\\CrudKitServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "laravel/framework": "^10.0|^11.0",
+    "spatie/laravel-medialibrary": "^11.0"
+  }
+}
