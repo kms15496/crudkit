@@ -28,7 +28,6 @@
                         </div>
 
                         @yield('form')
-                        {{ \$slot }}
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 {
-  "name": "kaung/crudkit",
+  "name": "kms15496/crudkit",
   "description": "Drop-in generic CRUD for Laravel",
   "type": "library",
   "license": "MIT",
@@ -11,13 +11,15 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Kaung\\CrudKit\\CrudKitServiceProvider"
+        "Kaung\\CrudKit\\CrudKitServiceProvider",
+        "Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider"
       ]
     }
   },
   "require": {
     "php": "^8.2",
     "laravel/framework": "^10.0|^11.0|^12.0",
-    "spatie/laravel-medialibrary": "^11.0"
+    "spatie/laravel-medialibrary": "^11.0",
+    "mcamara/laravel-localization": "^2.2"
   }
 }

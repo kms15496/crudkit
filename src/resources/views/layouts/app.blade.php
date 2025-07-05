@@ -58,7 +58,7 @@
     <!-- Layout -->
     <div class="min-h-screen bg-gray-100">
         @livewire('navigation-menu')
-        @include('header')
+        @include('crudkit::partials.header')
 
         <main>
             {{ $slot }}
