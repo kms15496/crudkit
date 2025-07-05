@@ -12,6 +12,8 @@ class CrudKitServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        View::composer('crudkit::partials.sidebar', \Kaung\CrudKit\View\Composers\SidebarComposer::class);
+
         /* -----------------------------------------------------------------
          | 1.  Views (load + publish)
          * -----------------------------------------------------------------*/
@@ -54,6 +56,10 @@ class CrudKitServiceProvider extends ServiceProvider
             __DIR__ . '/public' => public_path('vendor/crudkit'),
         ], 'crudkit-assets');
 
+        $this->publishes([
+            __DIR__ . '/config/sidebar.php' => config_path('sidebar.php'),
+        ], 'crudkit-sidebar-config');
+
         /* -----------------------------------------------------------------
          | 5.  Layout overrides
          * -----------------------------------------------------------------*/
@@ -61,6 +67,7 @@ class CrudKitServiceProvider extends ServiceProvider
             __DIR__ . '/resources/views/layouts/app.blade.php'   => resource_path('views/layouts/app.blade.php'),
             __DIR__ . '/resources/views/layouts/form-layout.blade.php'  => resource_path('views/layouts/form-layout.blade.php'),
             __DIR__ . '/resources/views/layouts/table-layout.blade.php' => resource_path('views/layouts/table-layout.blade.php'),
+            __DIR__ . '/resources/views/partials/sidebar.blade.php' => resource_path('views/navigation-menu.blade.php'),
         ], 'crudkit-layouts');
 
         /* -----------------------------------------------------------------
