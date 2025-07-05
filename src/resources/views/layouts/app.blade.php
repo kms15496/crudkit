@@ -97,6 +97,16 @@
         }).catch(console.error);
     </script>
 
+
+    <script>
+        document.getElementById('languageSwitcher').addEventListener('change', function() {
+            const selectedUrl = this.value;
+            if (selectedUrl) {
+                window.location.href = selectedUrl;
+            }
+        });
+    </script>
+
     <!-- Tagify / Choices -->
     <script src="{{ asset('vendor/crudkit/assets/js/plugins/choices.min.js') }}"></script>
 
