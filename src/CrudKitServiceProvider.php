@@ -12,8 +12,7 @@ class CrudKitServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        View::composer('crudkit::partials.sidebar', \Kaung\CrudKit\View\Composers\SidebarComposer::class);
-
+        View::composer('*', SidebarComposer::class);
         /* -----------------------------------------------------------------
          | 1.  Views (load + publish)
          * -----------------------------------------------------------------*/
