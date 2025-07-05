@@ -2,27 +2,47 @@
 
 namespace Kaung\CrudKit;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class CrudKitServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        // Load package views
+        /* -----------------------------------------------------------------
+         | 1.  Load, then publish the package views
+         * -----------------------------------------------------------------*/
         $this->loadViewsFrom(__DIR__.'/resources/views', 'crudkit');
 
-        // Publish views
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/crudkit'),
         ], 'crudkit-views');
 
-        // Publish config
+        /* -----------------------------------------------------------------
+         | 2.  Publish the package config
+         * -----------------------------------------------------------------*/
         $this->publishes([
             __DIR__.'/config/crudkit.php' => config_path('crudkit.php'),
         ], 'crudkit-config');
 
-        // Load routes
+        /* -----------------------------------------------------------------
+         | 3.  Publish public assets  →  public/vendor/crudkit
+         * -----------------------------------------------------------------*/
+        $this->publishes([
+            __DIR__.'/public' => public_path('vendor/crudkit'),
+        ], 'crudkit-assets');
+
+        /* -----------------------------------------------------------------
+         | 4.  Overwrite resources/views/layouts/app.blade.php
+         * -----------------------------------------------------------------*/
+        $this->publishes([
+            __DIR__.'/resources/views/layouts/app.blade.php'
+                => resource_path('views/layouts/app.blade.php'),
+        ], 'crudkit-app-layout');
+
+        /* -----------------------------------------------------------------
+         | 5.  Load package routes
+         * -----------------------------------------------------------------*/
         if (! $this->app->routesAreCached()) {
             Route::middleware(config('crudkit.middleware', ['web', 'auth']))
                  ->prefix(config('crudkit.prefix', 'crudkit'))
