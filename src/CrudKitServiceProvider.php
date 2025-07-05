@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use Kaung\CrudKit\View\Composers\SidebarComposer;
 class CrudKitServiceProvider extends ServiceProvider
 {
     public function boot(): void
