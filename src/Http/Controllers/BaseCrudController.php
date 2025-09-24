@@ -28,7 +28,8 @@ class BaseCrudController extends BaseController
         $hideFields = [],
         $multiple = [],
         $checkBoxFields = [],
-        $radioFields = []
+        $radioFields = [],
+         $selectFields = []
     ) {
         $this->model         = $model;
         $this->view_base     = $view_base;
@@ -39,6 +40,7 @@ class BaseCrudController extends BaseController
         $this->multiple      = $multiple;
         $this->checkBoxFields = $checkBoxFields;
         $this->radioFields   = $radioFields;
+         $this->selectFields = $selectFields;
     }
 
     public function index()

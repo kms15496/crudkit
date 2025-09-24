@@ -44,36 +44,45 @@
                     @unless($field==='password' )
                     value="{{ old($field, $item->$field ?? '') }}"
                     @endunless>
-
-                @elseif (strpos($rules, 'numeric') !== false)
-                <input type="number" class="form-control" id="{{ $field }}" name="{{ $field }}"
-                    value="{{ old($field, $item->$field ?? '') }}" required>
-
-                @elseif (strpos($rules, 'file') !== false)
-                <input type="file" class="form-control" id="{{ $field }}" name="{{ $field }}" onchange="previewImage(event, '{{ $field }}')">
-                <div class="mt-2">
-                    @if ($item && $item->getFirstMediaUrl($collection))
-                    <img id="preview-{{ $field }}" src="{{ $item->getFirstMediaUrl($collection) }}" width="150px" height="150px" />
-                    @else
-                    <img id="preview-{{ $field }}" style="display: none;" width="150px" height="150px" />
-                    @endif
-                </div>
-
-                @elseif (strpos($field, 'start_year') !== false || strpos($field, 'end_year') !== false || strpos($rules, 'integer') !== false)
-                <input type="number" class="form-control yearpicker" id="{{ $field }}" name="{{ $field }}" min="1900"
-
-                    value="{{ old($field, $item->$field ?? ($field == 'end_year' ? date('Y') + 1 : date('Y'))) }}" required>
-
-                @elseif (array_key_exists($field, $selectFields))
-                @php
-                // Define which fields should allow multiple selections
-                $multipleFields = $multiple;
-                $isMultiple = in_array($field, $multipleFields);
-                $isCheckBoxField = in_array($field,$checkBoxFields);
-                $isRadioField = in_array($field, $radioFields);
-                $fieldName = $isMultiple ? $field . '[]' : $field;
-                $selectedValues = old($field, $item?->$field ?? ($isMultiple || $isCheckBoxField ? [] : ''));
-                @endphp
+                            @elseif (strpos($rules, 'numeric') !== false)
+                                <input type="number" class="form-control" id="{{ $field }}"
+                                    name="{{ $field }}" value="{{ old($field, $item->$field ?? '') }}" required>
+                            @elseif (strpos($rules, 'integer') !== false)
+                                <input type="number" class="form-control" id="{{ $field }}"
+                                    name="{{ $field }}" value="{{ old($field, $item->$field ?? '') }}" required>
+                            @elseif (strpos($rules, 'file') !== false)
+                                <input type="file" class="form-control" id="{{ $field }}"
+                                    name="{{ $field }}" onchange="previewImage(event, '{{ $field }}')">
+                                <div class="mt-2">
+                                    @if ($item && $item->getFirstMediaUrl($collection))
+                                        <img id="preview-{{ $field }}"
+                                            src="{{ $item->getFirstMediaUrl($collection) }}" width="150px"
+                                            height="150px" />
+                                    @else
+                                        <img id="preview-{{ $field }}" style="display: none;" width="150px"
+                                            height="150px" />
+                                    @endif
+                                </div>
+                            @elseif (strpos($field, 'start_year') !== false ||
+                                    strpos($field, 'end_year') !== false ||
+                                    strpos($rules, 'integer') !== false)
+                                <input type="number" class="form-control yearpicker" id="{{ $field }}"
+                                    name="{{ $field }}" min="1900"
+                                    value="{{ old($field, $item->$field ?? ($field == 'end_year' ? date('Y') + 1 : date('Y'))) }}"
+                                    required>
+                            @elseif (array_key_exists($field, $selectFields))
+                                @php
+                                    // Define which fields should allow multiple selections
+                                    $multipleFields = $multiple;
+                                    $isMultiple = in_array($field, $multipleFields);
+                                    $isCheckBoxField = in_array($field, $checkBoxFields);
+                                    $isRadioField = in_array($field, $radioFields);
+                                    $fieldName = $isMultiple ? $field . '[]' : $field;
+                                    $selectedValues = old(
+                                        $field,
+                                        $item?->$field ?? ($isMultiple || $isCheckBoxField ? [] : ''),
+                                    );
+                                @endphp
 
                 @if($isRadioField)
                 <div class="row">
